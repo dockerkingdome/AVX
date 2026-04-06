@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 			player = new RealtimePlayer(&Song, numRenderThreads);
 		}
 
-		printf("Realtime player activated. Press ESC to quit.\n");
+		printf("AVX realtime player activated. Press ESC to quit.\n");
 		player->Play();
 		while (!GetAsyncKeyState(VK_ESCAPE))
 		{
@@ -59,8 +59,8 @@ int main(int argc, char **argv)
 			if (songPos >= player->GetLength()) break;
 			int minutes = (int)songPos / 60;
 			int seconds = (int)songPos % 60;
-			int hundredths = (int)(songPos * 100.0) % 100;
-			printf("\r %.1i:%.2i.%.2i", minutes, seconds, hundredths);
+			int bytes = (int)(songPos * 1000.0);
+			printf("\r %i kbps %.1i:%.2i.%.2i", bytes, minutes, seconds, hundredths);
 
 			Sleep(10);
 		}
